@@ -108,11 +108,12 @@ def test():
     gpu = 0
     torch.cuda.set_device(gpu)
     
-    net = WindowAttention(6, 2, num_heads=8).cuda()
-    sample_x = torch.randn(32, 6, 10, 10, 10).cuda()
-    sample_y = net(sample_x)
-    
-    assert sample_x.shape == sample_y.shape
+    for use_cyclic_shift in (False, True):
+        net = WindowAttention(6, 2, num_heads=8, use_cyclic_shift=use_cyclic_shift).cuda()
+        sample_x = torch.randn(32, 6, 10, 10, 10).cuda()
+        sample_y = net(sample_x)
+        
+        assert sample_x.shape == sample_y.shape
     print('PASS:', __file__)
     
 
