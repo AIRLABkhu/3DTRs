@@ -1,8 +1,8 @@
 import torch
 
 
-def cyclic_shift_3d(x: torch.Tensor, patch_size: int, inverse: bool=False):
-    if not inverse:
+def cyclic_shift_3d(x: torch.Tensor, patch_size: int, reverse: bool=False):
+    if not reverse:
         patch_indices = torch.tensor(tuple(x.shape)[2:]) - patch_size
         
         left_split = x[:, :, :patch_indices[0], :, :]
